@@ -2,7 +2,7 @@
 
 describe('teste de login', () => {
   beforeEach(() => {
-    cy.visit('https://www.jogatina.com') //entra na home page do site
+    cy.visit(Cypress.env('homePage')) //entra na home page do site
   })
 
   it('testa funcionalidade botão Entrar e login', () => {
@@ -10,8 +10,8 @@ describe('teste de login', () => {
     cy.get('#email-login').should('not.be.visible')   // verifica se antes de clicar em Entrar, o form está escondido
     cy.get('.header__btn-login').click()
     cy.get('#email-login').should('be.visible')   // verifica se após clicar em Entrar, o form fica visível
-    cy.get('#email-login').type('trilles.ficticio@gmail.com').should('have.value', 'trilles.ficticio@gmail.com')
-    cy.get('#senha-login').type('Ficticio1234')
+    cy.get('#email-login').type(Cypress.env('email')).should('have.value', Cypress.env('email'))
+    cy.get('#senha-login').type(Cypress.env('password'))
     cy.get('#loginform > .btn').click()    // efetua login
 
     cy.url().should('include', '/welcome')   // verifica se foi redirecionado para a página de bem-vindo

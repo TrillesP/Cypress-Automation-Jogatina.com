@@ -2,10 +2,10 @@
 
 describe('automação jogatina após login', () => {
     beforeEach(() => {
-        cy.visit('https://www.jogatina.com')
+        cy.visit(Cypress.env('homePage'))
         cy.get('.header__btn-login').click()
-        cy.get('#email-login').type('trilles.ficticio@gmail.com')
-        cy.get('#senha-login').type('Ficticio1234')
+        cy.get('#email-login').type(Cypress.env('email'))
+        cy.get('#senha-login').type(Cypress.env('password'))
         cy.get('#loginform > .btn').click()    //entra na welcome page do site
     })
 
@@ -16,7 +16,7 @@ describe('automação jogatina após login', () => {
             .invoke('css', 'overflow', 'visible')   // troco o valor do CSS overflow para "visible"
             .should('have.css', 'overflow', 'visible')
         cy.get('.header__nav-item--profile').within((avatar) => {
-            cy.wrap(avatar).find('.header__subnav-info-email').should('be.visible').and('have.text', 'trilles.ficticio@gmail.com')
+            cy.wrap(avatar).find('.header__subnav-info-email').should('be.visible').and('have.text', Cypress.env('email'))
           })
         // verifica se aparece o menu do usuário dando `wrap` no elemento com troca do `overflow` no CSS
         // também verifica se o e-mail aparece corretamente
@@ -28,7 +28,7 @@ describe('automação jogatina após login', () => {
             .should('have.css', 'overflow', 'hidden')   // volto o CSS overflow para o valor inicial de "hidden"
 
         cy.get('.avatar').realHover('mouse').then(() => {
-            cy.get('.header__subnav-info-email').should('be.visible').and('have.text', 'trilles.ficticio@gmail.com')
+            cy.get('.header__subnav-info-email').should('be.visible').and('have.text', Cypress.env('email'))
             // verifica funcionalidade do avatar com 'mouseover' e se o e-mail correto aparece
             // `realHover` foi importado em '../support/e2e.js' e é baseada no Chrome
             // não funciona em Firefox e outros browsers que não são chrome-based
@@ -50,7 +50,7 @@ describe('automação jogatina após login', () => {
         // verifica se o valor inicial é "Disponível"
         cy.get('.Select--single').click()
         cy.get('.Select--single').should('have.class', 'is-open')
-        // verifica se a classe do componente muda para mostrar as outras opções de estado
+        // verifica se a classe do elemento muda para mostrar as outras opções de estado do usuário
         
         cy.get('.Select-input')
             .invoke('attr', 'aria-activedescendant')
@@ -69,9 +69,9 @@ describe('automação jogatina após login', () => {
     it('testa clicar para jogar um jogo mobile e verifica se as informações batem', () => {
         cy.contains('clicando aqui').click()  //clica na opção de um jogo mobile
 
-        cy.get('[src="https://s3.amazonaws.com/static.jogatina.com/flash-installer/instalador-jogatina-win-1.png"]')
+        cy.get(Cypress.env('image01'))
             .isFixtureImg("instalador-jogatina-win-1.png");
-        cy.get('[src="https://s3.amazonaws.com/static.jogatina.com/flash-installer/instalador-jogatina-win-2.png"]')
+        cy.get(Cypress.env('image02'))
             .isFixtureImg("instalador-jogatina-win-2.png");
         // verifica se duas das imagens da explicação de como instalar os jogos mobile renderizam corretamente
         // aqui foi usada a mesma função criada para o teste 01
@@ -80,13 +80,13 @@ describe('automação jogatina após login', () => {
     })
 
     it('edição de Perfil, realizando modificações e verificando se ocorrem corretamente', () => {
-        cy.visit('https://www.jogatina.com/site/account/manage')
+        cy.visit(Cypress.env('accManage'))
         cy.contains('Feminino').should('not.exist')
         cy.contains('10/06/1993').should('not.exist')
         // verifica inicialmente se os valores que serão colocados já não estão presentes na página da conta
 
 
-        cy.visit('https://www.jogatina.com/site/profile/info')
+        cy.visit(Cypress.env('profileUpdate'))
         cy.get('#mascGender').should('have.attr', 'checked')
         cy.get('#femGender').click()   // trocando Sexo
         cy.get('#birthday').find('[value="21"]').should('have.attr', 'selected')
@@ -96,7 +96,8 @@ describe('automação jogatina após login', () => {
         cy.get('.md-btn--primary').click()   // alterando
 
         cy.contains('Perfil alterado com sucesso').should('exist')
-        cy.visit('https://www.jogatina.com/site/profile/info')  // dando refresh na edição de perfil
+        cy.visit(Cypress.env('profileUpdate'))  // dando refresh na edição de perfil
+        // para verificar se os dados foram alterados nessa página
         cy.get('#mascGender').should('not.have.attr', 'checked')
         cy.get('#femGender').should('have.attr', 'checked')
         cy.get('#birthday').find('[value="21"]').should('not.have.attr', 'selected')
@@ -106,9 +107,10 @@ describe('automação jogatina após login', () => {
         // verificando se as alterações ocorreram corretamente
 
         
-        cy.visit('https://www.jogatina.com/site/account/manage')
-        // retorna para a página de gerenciamento de conta para verificar os valores modificados
-        cy.get('#editemail').should('contain.text', 'trilles.ficticio@gmail.com')
+        cy.visit(Cypress.env('accManage'))
+        // retorna para a página de gerenciamento de conta para verificar
+        // se os valores modificados persistem para outras páginas do site
+        cy.get('#editemail').should('contain.text', Cypress.env('email'))
 
         cy.contains('Feminino').should('exist')
         cy.contains('10/06/1993').should('exist')
@@ -116,17 +118,18 @@ describe('automação jogatina após login', () => {
 
 
         // como para esse teste eu realizo uma troca de valores...
-        // para passá-lo novamente altere primeiro os valores para os originais (sexo: M, data nasc: 21/04/1993)
+        // para passá-lo novamente altere primeiro os valores da sua conta para os seguintes:
+        // (sexo: Masculino, data nasc: 21/04/1993)
         
     })
 
     it('verifica funcionalidade do botão "Ver meu Perfil" do menu de usuário', () => {
         cy.get('.avatar').realHover('mouse')
-        cy.get('.header__subnav-info-nickname').should('be.visible').and('have.text', 'trilles.02368525')
+        cy.get('.header__subnav-info-nickname').should('be.visible').and('have.text', Cypress.env('nickname'))
         cy.contains('Ver meu Perfil').click({force: true})
 
         cy.url().should('include', '/perfil')   //verifica se foi redirecionado corretamente
-        cy.get('.apelido').should('exist').and('have.text', 'trilles.02368525')   //verifica se o apelido aparece corretamente
+        cy.get('.apelido').should('exist').and('have.text', Cypress.env('nickname'))   //verifica se o apelido aparece corretamente
         // o teste acima deveria funcionar, mas apresenta um erro que foi encontrado pelo Cypress
         // na própria aplicação do site Jogatina.com
 
