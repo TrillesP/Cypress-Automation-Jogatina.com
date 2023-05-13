@@ -107,6 +107,7 @@ describe('automação jogatina após login', () => {
         cy.get('#femGender').should('have.attr', 'checked')
         cy.get('#birthday').find('[value="21"]').should('not.have.attr', 'selected')
         cy.get('#birthday').find('[value="10"]').should('have.attr', 'selected')
+        cy.get('#birthmonth').find('[value="3"]').should('not.have.attr', 'selected')
         cy.get('#birthmonth').find('[value="5"]').should('have.attr', 'selected')
         // verificando se as alterações ocorreram corretamente
 
