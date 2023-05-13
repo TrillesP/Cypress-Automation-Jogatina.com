@@ -12,7 +12,7 @@ Cypress.Commands.add("isFixtureImg",{prevSubject: true},(ele, fixtureImg) =>{
                         expect(img.naturalWidth).to.equal(fixtureImg.naturalWidth);
                         expect(img.naturalHeight).to.equal(fixtureImg.naturalHeight);
                         //verifica tamanho da imagem
-                        resolve();   
+                        resolve();
                     }
                 })
             })
