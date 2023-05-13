@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('automação jogatina após login', () => {
+describe('automação jogatina homepage após login', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('homePage'))
         cy.get('.header__btn-login').click()
@@ -41,8 +41,9 @@ describe('automação jogatina após login', () => {
     })
 
     it('testa clicar para jogar buraco fechado e alterar status do usuário de "Disponível" para "Invisível"', () => {
-        cy.get('.jogo.jogo-buraco-fechado > .acoes > .btn').should('be.visible')
-        cy.get('.jogo.jogo-buraco-fechado > .acoes > .btn').click()
+        cy.visit(Cypress.env('buracoFechado'))
+        cy.get('.btn-amarelo').should('be.visible')
+        cy.get('.btn-amarelo').click()
         
         cy.url().should('include', 'BURACO_FECHADO')
         cy.get('.Select--single').should('not.have.class', 'is-open')
@@ -76,50 +77,6 @@ describe('automação jogatina após login', () => {
         // verifica se duas das imagens da explicação de como instalar os jogos mobile renderizam corretamente
         // aqui foi usada a mesma função criada para o teste 01
         // a função se encontra no path `cypress/support/commands.js`
-        
-    })
-
-    it('edição de Perfil, realizando modificações e verificando se ocorrem corretamente', () => {
-        cy.visit(Cypress.env('accManage'))
-        cy.contains('Feminino').should('not.exist')
-        cy.contains('10/06/1993').should('not.exist')
-        // verifica inicialmente se os valores que serão colocados já não estão presentes na página da conta
-
-
-        cy.visit(Cypress.env('profileUpdate'))
-        cy.get('#mascGender').should('have.attr', 'checked')
-        cy.get('#femGender').click()   // trocando Sexo
-        cy.get('#birthday').find('[value="21"]').should('have.attr', 'selected')
-        cy.get('#birthmonth').find('[value="3"]').should('have.attr', 'selected')
-        cy.get('#birthday').select(10)   // trocando dia
-        cy.get('#birthmonth').select(6)  // trocando mês
-        cy.get('.md-btn--primary').click()   // alterando
-
-        cy.contains('Perfil alterado com sucesso').should('exist')
-        cy.visit(Cypress.env('profileUpdate'))  // dando refresh na edição de perfil
-        // para verificar se os dados foram alterados nessa página
-        cy.get('#mascGender').should('not.have.attr', 'checked')
-        cy.get('#femGender').should('have.attr', 'checked')
-        cy.get('#birthday').find('[value="21"]').should('not.have.attr', 'selected')
-        cy.get('#birthday').find('[value="10"]').should('have.attr', 'selected')
-        cy.get('#birthmonth').find('[value="3"]').should('not.have.attr', 'selected')
-        cy.get('#birthmonth').find('[value="5"]').should('have.attr', 'selected')
-        // verificando se as alterações ocorreram corretamente
-
-        
-        cy.visit(Cypress.env('accManage'))
-        // retorna para a página de gerenciamento de conta para verificar
-        // se os valores modificados persistem para outras páginas do site
-        cy.get('#editemail').should('contain.text', Cypress.env('email'))
-
-        cy.contains('Feminino').should('exist')
-        cy.contains('10/06/1993').should('exist')
-        // verificação se todos os valores foram devidamente trocados e aparecem na página
-
-
-        // como para esse teste eu realizo uma troca de valores...
-        // para passá-lo novamente altere primeiro os valores da sua conta para os seguintes:
-        // (sexo: Masculino, data nasc: 21/04/1993)
         
     })
 
