@@ -70,18 +70,12 @@ describe('automação jogatina após login', () => {
         cy.contains('clicando aqui').click()  //clica na opção de um jogo mobile
 
         cy.get('[src="https://s3.amazonaws.com/static.jogatina.com/flash-installer/instalador-jogatina-win-1.png"]')
-            .should('be.visible')
-            .and(([img]) => {
-                expect(img.naturalWidth).to.equal(314);
-                expect(img.naturalHeight).to.equal(216);
-            })
+            .isFixtureImg("instalador-jogatina-win-1.png");
         cy.get('[src="https://s3.amazonaws.com/static.jogatina.com/flash-installer/instalador-jogatina-win-2.png"]')
-            .should('be.visible')
-            .and(([img]) => {
-                expect(img.naturalWidth).to.equal(420);
-                expect(img.naturalHeight).to.equal(327);
-            })
+            .isFixtureImg("instalador-jogatina-win-2.png");
         // verifica se duas das imagens da explicação de como instalar os jogos mobile renderizam corretamente
+        // aqui foi usada a mesma função criada para o teste 01
+        // a função se encontra no path `cypress/support/commands.js`
         
     })
 

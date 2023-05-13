@@ -21,12 +21,11 @@ describe('teste de login', () => {
     cy.get('[data-gamename="Buraco"]').find('.texto-jogo').click()   // clica no jogo Buraco
     cy.url().should('include', '/buraco-online')
 
-    cy.get('[alt="Jogo de Buraco Online"]')   // verifica se a imagem do jogo aparece e renderiza corretamente
-            .should('be.visible')
-            .and(([img]) => {
-                expect(img.naturalWidth).to.equal(300);
-                expect(img.naturalHeight).to.equal(100);
-            })
+    cy.get('[alt="Jogo de Buraco Online"]').isFixtureImg("BURACO-pt_BR.png")
+    // aqui eu criei um comando novo para o Cypress para melhor visualização e organização
+    // com as imagens a serem verificadas baixadas na pasta do projeto
+    // ele verifica se a imagem baixada condiz em tamanho com a imagem carregada na página
+    // o código da função está no caminho cypress/support/commands.js
 
     cy.get('#emailIn').should('be.visible')  // verifica se o input do email está visível
     cy.get('#emailIn').invoke('attr', 'placeholder').should('eq', 'Email')  // verifica placeholder do campo input email
