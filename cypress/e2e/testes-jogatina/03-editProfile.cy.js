@@ -52,4 +52,12 @@ describe('automação jogatina edit profile', () => {
         // (sexo: Masculino, data nasc: 21/04/1993)
     })
 
+    after(() => {
+        cy.visit(Cypress.env('profileUpdate'))
+        cy.get('#mascGender').click()
+        cy.get('#birthday').select(21)
+        cy.get('#birthmonth').select(4)
+        cy.get('.md-btn--primary').click()
+    })   //trocando de volta os valores para os originais
+
 })
