@@ -16,6 +16,10 @@ Testes em Cypress de algumas funcionalidades do site Jogatina.com
 
 ### :game_die: Rodando os testes
 
+__________________________________
+ Se preferir, verifique o teste que foi rodado na aba **Actions**.
+__________________________________
+
 1. Instale as dependências com o comando `npm install`
 
 2. Antes de rodar os testes, edite o arquivo `cypress-example.env.json` na pasta do projeto para realizar o login corretamente. Para fazer isso, altere as chaves do objeto <strong><code style="color : red">removendo os underlines</code></strong> e colocando os valores do seu login.
