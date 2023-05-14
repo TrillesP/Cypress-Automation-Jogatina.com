@@ -12,3 +12,7 @@ jobs:
        with:
          command: npx cypress run
          browser: chrome
+       env:
+         CYPRESS_email: trilles.ficticio@gmail.com
+         CYPRESS_password: Ficticio1234
+         CYPRESS_nickname: trilles.02368525
