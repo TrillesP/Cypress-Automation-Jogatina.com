@@ -9,22 +9,23 @@ Testes em Cypress de algumas funcionalidades do site Jogatina.com
 ### Diferenciais
 
 - Mapeamento de elementos utilizando funções diversas para demonstrar versatilidade.
-- Detecção de renderização de imagens com tamanhos corretos de forma detalhada.
+- Detecção de renderização de imagens com tamanhos corretos de forma detalhada utilizando fixtures e custom functions.
 - Testado uso de realHover e importação de funções de bibliotecas para usar com Cypress.
 - Verificação de atributos de elementos e verificação e modificação de estilos CSS para encontrar valores corretos.
+- Modificação de valores para constantes com arquivos .env.json e cypress.config.js para melhor visualização.
 
-### Scripts
+### :game_die: Rodando os testes
 
-Primeiro instale as dependências com o comando `npm install`
+1. Instale as dependências com o comando `npm install`
 
-Crie um arquivo `cypress.env.json` na pasta do projeto(junto do package.json) para realizar o login corretamente no seguinte formato:
-{
-    "email": "seuEmail",
-    "password": "seuPassword",
-    "nickname": "seuNickname"
-}
+2. Antes de rodar os testes, edite o arquivo `cypress-example.env.json` na pasta do projeto para realizar o login corretamente. Para fazer isso, altere as chaves do objeto <strong><code style="color : red">removendo os underlines</code></strong> e colocando os valores do seu login.
 
-Para rodar os testes em Cypress, rode o comando `npx cypress open`, selecione o test E2E e escolha o Chrome preferencialmente como navegador.
+3. Para realizar os testes no Chrome, rode o comando `npm run test`.
+ 
+4. Caso não tenha o Chrome instalado, use o comando `npm run test:otherBrowser` para escolher o browser desejado.
+ 
+_Você pode rodar cada teste individualmente. Na aba Specs, clique no teste que deseja rodar._
 
-Com o Cypress aberto no navegador você pode rodar cada teste individualmente, na aba Specs, clique no teste para rodá-lo.
+5. Se preferir, rode os testes diretamente pelo terminal com o comando `npm run cy:terminal`. Esses testes também tiram screenshots e gravam vídeos automáticos dos testes em execução e os colocam nas pastas `cypress/screenshots` e `cypress/videos` respectivamente.
+
 O teste 03 têm informações que precisam ser editadas antes de ser rodado, pois mexe com informações de usuário, então dependerá do login utilizado.
