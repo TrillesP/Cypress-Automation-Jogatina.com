@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open --e2e --browser=chrome --env device=web"
+    "test": "cypress open --e2e --browser=chrome --env device=web",
+    "test:otherBrowser": "cypress open --e2e",
+    "cy:terminal": "cypress run --env device=web"
   },
   "keywords": [],
   "author": "",
