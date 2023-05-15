@@ -12,7 +12,7 @@ Testes em Cypress de algumas funcionalidades do site Jogatina.com
 - Detecção de renderização de imagens com tamanhos corretos de forma detalhada utilizando fixtures e custom functions.
 - Testado uso de realHover e importação de funções de bibliotecas para usar com Cypress.
 - Verificação de atributos de elementos e verificação e modificação de estilos CSS para encontrar valores corretos.
-- Modificação de valores para constantes com arquivos .env.json e cypress.config.js para melhor visualização.
+- Modificação de valores para constantes com arquivos .env.json, cypress.config.js e mapeamento separado no arquivo selectors.cy.js para melhor visualização.
 
 ### :game_die: Rodando os testes
 
