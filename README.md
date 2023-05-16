@@ -22,12 +22,10 @@ __________________________________
 
 1. Instale as dependências com o comando `npm install`
 
-2. Antes de rodar os testes, edite o arquivo `cypress-example.env.json` na pasta do projeto para realizar o login corretamente. Para fazer isso, altere as chaves do objeto <strong><code style="color : red">removendo os underlines</code></strong> e colocando os valores do seu login.
-
-3. Para realizar os testes no Chrome, rode o comando `npm run test`.
+2. Para realizar os testes no Chrome, rode o comando `npm run test`.
  
-4. Caso não tenha o Chrome instalado, use o comando `npm run test:otherBrowser` para escolher o browser desejado.
+3. Caso não tenha o Chrome instalado, use o comando `npm run test:otherBrowser` para escolher o browser desejado.
  
 _Você pode rodar cada teste individualmente. Na aba Specs, clique no teste que deseja rodar._
 
-5. Se preferir, rode os testes diretamente pelo terminal com o comando `npm run cy:terminal`. Esses testes também tiram screenshots e gravam vídeos automáticos dos testes em execução e os colocam nas pastas `cypress/screenshots` e `cypress/videos` respectivamente.
+4. Se preferir, rode os testes diretamente pelo terminal com o comando `npm run cy:terminal`. Esses testes também tiram screenshots e gravam vídeos automáticos dos testes em execução e os colocam nas pastas `cypress/screenshots` e `cypress/videos` respectivamente.
